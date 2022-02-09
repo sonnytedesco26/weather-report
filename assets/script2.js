@@ -62,7 +62,7 @@ function getWeather(object){
     .then(function(uvStuff){
         var historyList = [];
         var loadedWeatherPic = `https:///openweathermap.org/img/w/${cityDisplay.cityWeatherPic}.png`;
-        renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, cityDisplay.cityWeatherPic);
+        renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, loadedWeatherPic);
         renderHistory(cityDisplay.name);
     })
     })
