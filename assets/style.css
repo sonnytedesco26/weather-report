@@ -2,3 +2,7 @@ img{
     width: 80px;
 }
 
+.clickHistory{
+    display: flex;
+    cursor: pointer;
+}

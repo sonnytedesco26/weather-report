@@ -40,6 +40,7 @@ searchButton.on("click", function(r){
 
 clearButton.on("click", function(){
     localStorage.clear();
+    renderHistory("");
 })
 
 $(document).on("click", ".clickHistory", function(){
