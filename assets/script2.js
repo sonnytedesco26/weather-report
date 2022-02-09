@@ -70,23 +70,34 @@ function getWeather(object){
     })
     .then(function(uvStuff){
         if(JSON.parse(localStorage.getItem("searchHistory")) == null){
-
-            var historyList = [];
             var loadedWeatherPic = `https:///openweathermap.org/img/w/${cityDisplay.cityWeatherPic}.png`;
-            
-            historyList.push(cityDisplay.name);
-            localStorage.setItem("searchHistory", JSON.stringify(historyList));
-            renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, loadedWeatherPic);
-            renderHistory(cityDisplay.name);
+            var historyList = [];
+            //if city name not present in list
+            if(historyList.indexOf(cityDisplay.name) === -1){
+                //var loadedWeatherPic = `https:///openweathermap.org/img/w/${cityDisplay.cityWeatherPic}.png`;
+                historyList.push(cityDisplay.name);
+                localStorage.setItem("searchHistory", JSON.stringify(historyList));
+                renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, loadedWeatherPic);
+                renderHistory(cityDisplay.name);
+            }else{
+                //var loadedWeatherPic = `https:///openweathermap.org/img/w/${cityDisplay.cityWeatherPic}.png`;
+                renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, loadedWeatherPic);
+            }
+        
             } else{
                 var historyList = JSON.parse(localStorage.getItem("searchHistory"));
                 var loadedWeatherPic = `https:///openweathermap.org/img/w/${cityDisplay.cityWeatherPic}.png`;
+                if(historyList.indexOf(cityDisplay.name) === -1){
 
-                historyList.push(cityDisplay.name);
-                localStorage.setItem("searchHistory", JSON.stringify(historyList));
+                    historyList.push(cityDisplay.name);
+                    localStorage.setItem("searchHistory", JSON.stringify(historyList));
 
-                renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, loadedWeatherPic);
-                renderHistory(cityDisplay.name);
+                    renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, loadedWeatherPic);
+                    renderHistory(cityDisplay.name);
+                } else{
+                    //var loadedWeatherPic = `https:///openweathermap.org/img/w/${cityDisplay.cityWeatherPic}.png`;
+                    renderWeather(cityDisplay.name, cityDisplay.cityTemp, cityDisplay.cityWind, cityDisplay.cityHumidity, uvStuff.value, loadedWeatherPic);
+                }
         }
     })
     })
