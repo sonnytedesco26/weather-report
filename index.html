@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Weather Dashboard</title>
 </head>
@@ -17,40 +18,39 @@
     <div class="col-lg-3 d-flex flex-column">
         <h4 class="m-2">Search by City:</h4>
         <input id="cityInput" type="text" placeholder=" Enter city" class="m-2 border">
-        <button id="search" class="btn btn-primary m-2" type="button">
+        <button id="searchButton" class="btn btn-primary m-2" type="button">
             Search
         </button>
-        <button id="clear" class="btn btn-dark m-2" type="button">
-            Clear Searches
-        </button>
-        <ol id="searchHistory"></ol>
+        <div id="searchHistory"></div>
     </div>
 
     <div class="col-lg-9">
         <div class="row">
             <div id="weatherToday" class="card col-lg-12 bg-danger">
-                <h2 id="cityName" class="align-middle">cityname</h2>
+                <h2 id="cityName" class="align-middle"></h2>
+                <h3 id="cityDate" class="align-middle"></h3>
                 <img id="weatherPic" alt="weatherPic">
-                <p id="temp">temp</p>
-                <p id="wind">wind</p>
-                <p id="humidity">humid</p>
-                <p id="UVIndex">UV</p>
+                <p id="temp"></p>
+                <p id="wind"></p>
+                <p id="humidity"></p>
+                <p id="UVIndex"></p>
             </div>
         </div>
 
         <div id="fiveDay" class="row card bg-secondary">
             <h2 class="m-2">5-Day Forecast:</h2>
-        </div>
-        <div class="row">
-            <div id="forecast" class="col-2 bg-primary m-1 rounded">HELLO</div>
-            <div id="forecast" class="col-2 bg-primary m-1 rounded">HELLO</div>
-            <div id="forecast" class="col-2 bg-primary m-1 rounded">HELLO</div>
-            <div id="forecast" class="col-2 bg-primary m-1 rounded">HELLO</div>
-            <div id="forecast" class="col-2 bg-primary m-1 rounded">HELLO</div>
+            <div id="forecast" class="row">
+                <div class="col-2 bg-primary m-1 rounded">HELLO</div>
+                <div class="col-2 bg-primary m-1 rounded">HELLO</div>
+                <div class="col-2 bg-primary m-1 rounded">HELLO</div>
+                <div class="col-2 bg-primary m-1 rounded">HELLO</div>
+                <div class="col-2 bg-primary m-1 rounded">HELLO</div>
+            </div>
         </div>
     </div>
 </div>
 
-    <script src="./assets/script.js"></script>
+    <script src="./assets/script2.js"></script>
+    <!--<script src="./assets/script.js"></script>-->
 </body>
 </html>
