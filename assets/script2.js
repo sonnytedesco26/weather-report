@@ -99,6 +99,31 @@ function getWeather(object) {
                         }
                     }
                 })
+
+                function getForecast() {
+                    forecast.empty();
+                    var fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${object}&APPID=${apiKey}`;
+                    $.ajax({
+                        url: fiveDayURL,
+                        method: "GET"
+                    })
+                    .then(function(fivedayForecast){
+                        for(i=0; i< fivedayForecast.list.length; i++){
+                            if(fivedayForecast.list[i].dt_txt.substring(0,10) != fivedayForecast.list[i+1].dt_txt.substring(0,10)){
+                            var fivedayDisplay={
+                                date: fivedayForecast.list[i].dt_txt,
+                                pic: fivedayForecast.list[i].weather[0].icon,
+                                temp: fivedayForecast.list[i].main.temp,
+                                humidity: fivedayForecast.list[i].main.humidity
+                            }
+                            var fivedayPic = `https:///openweathermap.org/img/w/${fivedayDisplay.pic}.png`;
+                            createForecast(fivedayDisplay.date, fivedayPic, fivedayDisplay.temp, fivedayDisplay.humidity);
+                        }
+                        }
+                    })
+                
+                }
+
                 getForecast();
         })
 }
@@ -113,6 +138,22 @@ function renderWeather(name, cityTemp, cityWind, cityHumidity, cityUVIndex, city
     weatherPic.attr("src", cityWeatherPic);
 }
 
+function createForecast(date, pic, temp, humidity) {
+    var forecastFiveDay = $("<div>").attr("id", "forecastFiveDay");
+    var forecastDate = $("<h2>").attr("id", "forecastDate");
+    var forecastPic = $("<img>").attr("id", "forecastPic")
+    var forecastTemp = $("<p>").attr("id", "forecastTemp")
+    var forecastHumid = $("<p>").attr("id", "forecastHumid")
+
+
+    forecast.append(forecastFiveDay);
+    forecastDate.text(date.substring(0,10));
+    forecastPic.attr("src", pic);
+    forecastTemp.text(`Temp: ${Math.floor(((temp-273.15)*1.8 + 32))} °F`)
+    forecastHumid.text(`Humidity: ${humidity} %`)
+
+    forecastFiveDay.append(forecastDate, forecastPic, forecastTemp, forecastHumid);
+}
 
 function renderHistory(name) {
     pastSearches.empty()
@@ -123,43 +164,4 @@ function renderHistory(name) {
         newHistoryItem.text(historyList[i]);
         pastSearches.prepend(newHistoryItem);
     }
-}
-
-function createForecast(date, pic, temp, humidity) {
-    var forecastFiveDay = $("<div>").attr("id", "forecastFiveDay");
-    var forecastDate = $("<h2>").attr("id", "forecastDate");
-    var forecastPic = $("<img>").attr("id", "forecastPic")
-    var forecastTemp = $("<p>").attr("id", "forecastTemp")
-    var forecastHumid = $("<p>").attr("id", "forecastHumid")
-
-
-    forecast.append(forecastFiveDay);
-    forecastDate.text(date);
-    forecastPic.attr("src", pic);
-    forecastTemp.text(`Temp: ${temp} °F`)
-    forecastHumid.text(`Humidity: ${humidity} %`)
-
-    forecastFiveDay.append(forecastDate, forecastPic, forecastTemp, forecastHumid);
-}
-
-function getForecast(object) {
-    forecast.empty();
-    var fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${object}&APPID=${apiKey}`;
-    $.ajax({
-        url: fiveDayURL,
-        method: "GET"
-    })
-    .then(function(fivedayForecast){
-        for(i=0; i< fivedayForecast.list.length; i++){
-            var fivedayDisplay={
-                date: fivedayForecast.list[i].dt_txt,
-                pic: fivedayForecast.list[i].weather[0].icon,
-                temp: fivedayForecast.list[i].main.temp,
-                humidity: fivedayForecast.list[i].main.humidity
-            }
-            var fivedayPic = `https:///openweathermap.org/img/w/${fivedayForecast.pic}.png`;
-            createForecast(fivedayDisplay.date, fivedayPic, fivedayDisplay.temp, fivedayDisplay.humidity);
-        }
-    })
-
 }
