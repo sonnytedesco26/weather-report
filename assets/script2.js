@@ -114,10 +114,12 @@ function getWeather(object) {
                                 date: fivedayForecast.list[i].dt_txt,
                                 pic: fivedayForecast.list[i].weather[0].icon,
                                 temp: fivedayForecast.list[i].main.temp,
+                                wind: fivedayForecast.list[i].wind.speed,
                                 humidity: fivedayForecast.list[i].main.humidity
                             }
                             var fivedayPic = `https:///openweathermap.org/img/w/${fivedayDisplay.pic}.png`;
-                            createForecast(fivedayDisplay.date, fivedayPic, fivedayDisplay.temp, fivedayDisplay.humidity);
+                            createForecast(fivedayDisplay.date, fivedayPic, fivedayDisplay.temp, fivedayDisplay.wind, fivedayDisplay.humidity);
+                            console.log(fivedayForecast)
                         }
                         }
                     })
@@ -138,30 +140,34 @@ function renderWeather(name, cityTemp, cityWind, cityHumidity, cityUVIndex, city
     weatherPic.attr("src", cityWeatherPic);
 }
 
-function createForecast(date, pic, temp, humidity) {
+function createForecast(date, pic, temp, wind, humidity) {
     var forecastFiveDay = $("<div>").attr("id", "forecastFiveDay");
-    var forecastDate = $("<h2>").attr("id", "forecastDate");
-    var forecastPic = $("<img>").attr("id", "forecastPic")
-    var forecastTemp = $("<p>").attr("id", "forecastTemp")
-    var forecastHumid = $("<p>").attr("id", "forecastHumid")
+    var forecastDate = $("<h3>").attr("id", "forecastDate");
+    var forecastPic = $("<img>").attr("id", "forecastPic");
+    var forecastTemp = $("<p>").attr("id", "forecastTemp");
+    var forecastWind = $("<p>").attr("id", "forecastWind");
+    var forecastHumid = $("<p>").attr("id", "forecastHumid");
 
 
     forecast.append(forecastFiveDay);
     forecastDate.text(date.substring(0,10));
     forecastPic.attr("src", pic);
-    forecastTemp.text(`Temp: ${Math.floor(((temp-273.15)*1.8 + 32))} °F`)
-    forecastHumid.text(`Humidity: ${humidity} %`)
+    forecastTemp.text(`Temp: ${Math.floor(((temp-273.15)*1.8 + 32))} °F`);
+    forecastWind.text(`Wind: ${wind} MPH`);
+    forecastHumid.text(`Humidity: ${humidity} %`);
 
-    forecastFiveDay.append(forecastDate, forecastPic, forecastTemp, forecastHumid);
+    forecastFiveDay.append(forecastDate, forecastPic, forecastTemp, forecastWind, forecastHumid);
 }
 
 function renderHistory(name) {
     pastSearches.empty()
 
     var historyList = JSON.parse(localStorage.getItem("searchHistory"));
+    if(localStorage.length != 0){
     for (i = 0; i < historyList.length; i++) {
         var newHistoryItem = $("<div>").attr("class", "clickHistory");
         newHistoryItem.text(historyList[i]);
         pastSearches.prepend(newHistoryItem);
     }
+    }  
 }

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <header class="text-center bg-dark p-3 text-light">
+    <header class="col-lg-12 text-center bg-dark p-3 text-light">
         <h1>Weather Dashboard</h1>
     </header>
 
@@ -30,9 +30,8 @@
 
     <div class="col-lg-9">
         <div class="row">
-            <style>.pinkclass {background-color: #8585d8;}</style>
             <div id="weatherToday" class="card col-lg-12 pinkclass">
-                <h2 id="cityName" class="align-middle"></h2>
+                <h2 id="cityName" class="align-middle mt-2"></h2>
                 <h3 id="cityDate" class="align-middle"></h3>
                 <img id="weatherPic" alt="">
                 <p id="temp">Temp: </p>
@@ -42,8 +41,8 @@
             </div>
         </div>
 
-        <div id="fiveDay" class="row card bg-secondary">
-            <h2 class="m-2">5-Day Forecast:</h2>
+        <div id="fiveDay" class="row card">
+            <h2 class="m-2 ml-3">5-Day Forecast:</h2>
             <div id="forecast" class="row">
             </div>
         </div>

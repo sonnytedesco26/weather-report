@@ -5,4 +5,48 @@ img{
 .clickHistory{
     display: flex;
     cursor: pointer;
+    text-align: center;
+    padding: 3px;
+    border-width: 3px;
+    border-radius: 5px;
+    border-style: solid;
+    background-color: lightgrey;
+    border-color: darkgrey;
+    flex-direction: column;
+    margin-bottom:10px;
+}
+
+.clickHistory:hover{
+    transition: 0.3s;
+    background-color:rgb(128, 128, 128)
+}
+
+.pinkclass{
+    background-color: #8585d8;
+}
+
+#forecast{
+    position: relative;
+    left: 25px;
+}
+
+#forecastFiveDay{
+    margin: 10px;
+    background-color: darkslateblue;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+#forecastFiveDay img{
+    width: 40px;
+}
+
+@media screen and (max-width: 990px) {
+    .card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
