@@ -99,6 +99,7 @@ function getWeather(object) {
                         }
                     }
                 })
+                getForecast();
         })
 }
 
@@ -149,13 +150,15 @@ function getForecast(object) {
         method: "GET"
     })
     .then(function(fivedayForecast){
-        for(i=0; i< 5; i++){
+        for(i=0; i< fivedayForecast.list.length; i++){
             var fivedayDisplay={
-                date:,
-                pic:,
-                temp:,
-                humidity:
+                date: fivedayForecast.list[i].dt_txt,
+                pic: fivedayForecast.list[i].weather[0].icon,
+                temp: fivedayForecast.list[i].main.temp,
+                humidity: fivedayForecast.list[i].main.humidity
             }
+            var fivedayPic = `https:///openweathermap.org/img/w/${fivedayForecast.pic}.png`;
+            createForecast(fivedayDisplay.date, fivedayPic, fivedayDisplay.temp, fivedayDisplay.humidity);
         }
     })
 
